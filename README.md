@@ -1,6 +1,6 @@
 # degrees
 
-Easily handle temperature values in rust. You can compare and combine temps safely without manually converting to and from different units.
+Easily handle temperature values in rust. The goal is to work with temps without needing to think about about units at all. You can compare and combine temps safely without manually converting to and from different units.
 For example you can subtract 10degC from 86degF. The crate will handle the conversions internally and give you a result in the initial unit.
 
 ```rust
