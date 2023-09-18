@@ -35,7 +35,7 @@ mod tests {
     fn should_subtract_two_c_temps() {
         let res = Temp::C(32.) - Temp::C(32.);
 
-        assert_eq!(res, Temp::F(0.));
+        assert_eq!(res, Temp::C(0.));
     }
 
     #[test]
