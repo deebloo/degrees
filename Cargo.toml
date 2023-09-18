@@ -1,5 +1,5 @@
 [package]
-name = "temp"
+name = "degrees"
 description = "Easily work with and compare temeratures in different units"
 version = "0.1.0"
 edition = "2021"
