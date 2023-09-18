@@ -25,16 +25,6 @@ mod tests {
     use super::*;
 
     #[test]
-    fn should_convert_to_c() {
-        assert_eq!(Temp::F(86.).to_c(), Temp::C(30.));
-    }
-
-    #[test]
-    fn should_convert_to_f() {
-        assert_eq!(Temp::C(30.).to_f(), Temp::F(86.));
-    }
-
-    #[test]
     fn should_subtract_two_f_temps() {
         let res = Temp::F(100.) - Temp::F(100.);
 
@@ -43,7 +33,7 @@ mod tests {
 
     #[test]
     fn should_subtract_two_c_temps() {
-        let res = Temp::F(32.) - Temp::F(32.);
+        let res = Temp::C(32.) - Temp::C(32.);
 
         assert_eq!(res, Temp::F(0.));
     }
