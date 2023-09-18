@@ -16,3 +16,10 @@ use degrees:Temp;
 
 let value = Temp::F(86.) == Temp::C(30.); // true
 ```
+
+To enable serde serialization.
+
+```toml
+[dependencies]
+degrees = { version = "0.3", features = ["serde"]}
+```
