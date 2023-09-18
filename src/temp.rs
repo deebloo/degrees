@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Clone, Copy)]
+#[derive(Debug, Serialize, Deserialize, Clone, Copy)]
 pub enum Temp {
     C(f32),
     F(f32),
