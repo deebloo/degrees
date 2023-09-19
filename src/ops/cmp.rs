@@ -32,10 +32,9 @@ mod tests {
 
     #[test]
     fn equal() {
-        println!("####### {:?} {:?}", Temp::F(86.).as_c(), Temp::C(30.));
-
         assert_eq!(Temp::F(86.) == Temp::C(30.), true);
-        assert_eq!(Temp::F(86.) == Temp::C(32.), false);
+        assert_eq!(Temp::F(86.) == Temp::K(303.15), true);
+        assert_eq!(Temp::C(30.) == Temp::K(303.15), true);
     }
 
     #[test]
