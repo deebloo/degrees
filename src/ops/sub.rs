@@ -16,6 +16,11 @@ impl Sub for Temp {
 
                 Self::F(val - target)
             }
+            Self::K(val) => {
+                let target: f32 = rhs.as_k().into();
+
+                Self::F(val - target)
+            }
         }
     }
 }

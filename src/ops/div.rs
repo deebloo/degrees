@@ -16,6 +16,11 @@ impl Div for Temp {
 
                 Self::F(val / target).round()
             }
+            Self::K(val) => {
+                let target: f32 = rhs.as_k().into();
+
+                Self::F(val / target).round()
+            }
         }
     }
 }
