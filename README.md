@@ -21,5 +21,5 @@ To enable serde serialization.
 
 ```toml
 [dependencies]
-degrees = { version = "0.3", features = ["serde"]}
+degrees = { version = "0.3", features = ["serde"] }
 ```
