@@ -1,4 +1,4 @@
 mod ops;
-pub mod temp;
+mod temp;
 
-pub use temp::*;
+pub use temp::Temp;
