@@ -2,8 +2,8 @@ use crate::Temp;
 
 impl PartialOrd for Temp {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-        let source: f32 = (*self).to_c().into();
-        let target: f32 = (*other).to_c().into();
+        let source: f32 = (*self).as_c().into();
+        let target: f32 = (*other).as_c().into();
 
         let mut res = std::cmp::Ordering::Equal;
 
@@ -19,8 +19,8 @@ impl PartialOrd for Temp {
 
 impl PartialEq for Temp {
     fn eq(&self, other: &Self) -> bool {
-        let source: f32 = (*self).to_c().into();
-        let target: f32 = (*other).to_c().into();
+        let source: f32 = (*self).as_c().into();
+        let target: f32 = (*other).as_c().into();
 
         source == target
     }
@@ -31,9 +31,22 @@ mod tests {
     use super::*;
 
     #[test]
-    fn should_be_equal() {
+    fn equal() {
+        println!("####### {:?} {:?}", Temp::F(86.).as_c(), Temp::C(30.));
+
         assert_eq!(Temp::F(86.) == Temp::C(30.), true);
         assert_eq!(Temp::F(86.) == Temp::C(32.), false);
+    }
+
+    #[test]
+    fn gte() {
+        assert_eq!(Temp::F(85.) >= Temp::F(80.), true);
+    }
+
+    #[test]
+    fn lte() {
+        assert_eq!(Temp::F(85.) <= Temp::F(112.), true);
+        assert_eq!(Temp::F(85.) <= Temp::F(87.), true);
     }
 
     #[test]

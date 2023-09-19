@@ -1,4 +1,4 @@
-use crate::{round, Temp};
+use crate::Temp;
 use std::ops::Div;
 
 impl Div for Temp {
@@ -7,14 +7,14 @@ impl Div for Temp {
     fn div(self, rhs: Self) -> Self::Output {
         match self {
             Self::C(val) => {
-                let target: f32 = rhs.to_c().into();
+                let target: f32 = rhs.as_c().into();
 
-                Self::C(round(val / target))
+                Self::C(val / target).round()
             }
             Self::F(val) => {
-                let target: f32 = rhs.to_f().into();
+                let target: f32 = rhs.as_f().into();
 
-                Self::F(round(val / target))
+                Self::F(val / target).round()
             }
         }
     }

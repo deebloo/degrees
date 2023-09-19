@@ -9,7 +9,7 @@ pub enum Temp {
 }
 
 impl Temp {
-    pub fn to_f(&self) -> Self {
+    pub fn as_f(&self) -> Self {
         match self {
             Temp::C(temp) => {
                 let raw = (temp * 9.) / 5. + 32.;
@@ -20,7 +20,7 @@ impl Temp {
         }
     }
 
-    pub fn to_c(&self) -> Self {
+    pub fn as_c(&self) -> Self {
         match self {
             Temp::C(val) => Temp::C(round(*val)),
             Temp::F(val) => {
@@ -28,6 +28,13 @@ impl Temp {
 
                 Temp::C(round(raw))
             }
+        }
+    }
+
+    pub fn round(&self) -> Self {
+        match self {
+            Temp::C(val) => Temp::C(round(*val)),
+            Temp::F(val) => Temp::F(round(*val)),
         }
     }
 }
@@ -53,11 +60,11 @@ mod tests {
 
     #[test]
     fn should_convert_to_c() {
-        assert_eq!(Temp::F(86.).to_c(), Temp::C(30.));
+        assert_eq!(Temp::F(86.).as_c(), Temp::C(30.));
     }
 
     #[test]
     fn should_convert_to_f() {
-        assert_eq!(Temp::C(30.).to_f(), Temp::F(86.));
+        assert_eq!(Temp::C(30.).as_f(), Temp::F(86.));
     }
 }
