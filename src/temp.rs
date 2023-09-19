@@ -11,15 +11,23 @@ pub enum Temp {
 impl Temp {
     pub fn to_f(&self) -> Self {
         match self {
-            Temp::C(temp) => Temp::F((((temp * 9.) / 5. + 32.) * 100.).round() / 100.),
-            Temp::F(val) => Temp::F(*val),
+            Temp::C(temp) => {
+                let raw = (temp * 9.) / 5. + 32.;
+
+                Temp::F(round(raw))
+            }
+            Temp::F(val) => Temp::F(round(*val)),
         }
     }
 
     pub fn to_c(&self) -> Self {
         match self {
-            Temp::C(val) => Temp::C(*val),
-            Temp::F(val) => Temp::C((((val - 32.) * (5. / 9.)) * 100.).round() / 100.),
+            Temp::C(val) => Temp::C(round(*val)),
+            Temp::F(val) => {
+                let raw = (val - 32.) * (5. / 9.);
+
+                Temp::C(round(raw))
+            }
         }
     }
 }
@@ -31,6 +39,12 @@ impl Into<f32> for Temp {
             Self::F(val) => val,
         }
     }
+}
+
+pub fn round(val: f32) -> f32 {
+    let res = (val * 100.).round() / 100.;
+
+    res
 }
 
 #[cfg(test)]
