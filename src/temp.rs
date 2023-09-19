@@ -82,10 +82,18 @@ mod tests {
     #[test]
     fn should_convert_to_c() {
         assert_eq!(Temp::F(86.).as_c(), Temp::C(30.));
+        assert_eq!(Temp::K(303.15).as_c(), Temp::C(30.));
     }
 
     #[test]
     fn should_convert_to_f() {
         assert_eq!(Temp::C(30.).as_f(), Temp::F(86.));
+        assert_eq!(Temp::K(303.15).as_f(), Temp::F(86.));
+    }
+
+    #[test]
+    fn should_convert_to_k() {
+        assert_eq!(Temp::C(30.).as_k(), Temp::K(303.15));
+        assert_eq!(Temp::F(86.).as_k(), Temp::K(303.15));
     }
 }
