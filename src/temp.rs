@@ -18,7 +18,7 @@ impl Temp {
 
                 Temp::C(round(raw))
             }
-            Self::K(val) => Temp::C(val - 273.15),
+            Self::K(val) => Temp::C(round(val - 273.15)),
         }
     }
 

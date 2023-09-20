@@ -28,6 +28,9 @@ impl PartialEq for Temp {
 
 #[cfg(test)]
 mod tests {
+    use serde::{Deserialize, Serialize};
+    use std::fs;
+
     use super::*;
 
     #[test]
@@ -52,5 +55,34 @@ mod tests {
     fn should_be_gt() {
         assert_eq!(Temp::F(86.) > Temp::C(0.), true);
         assert_eq!(Temp::F(86.) > Temp::C(100.), false);
+    }
+
+    #[derive(Debug, Serialize, Deserialize)]
+    struct TestData {
+        temperatureconversions: Vec<Conversion>,
+    }
+
+    #[derive(Debug, Serialize, Deserialize)]
+    struct Conversion {
+        celsius: f32,
+        fahrenheit: f32,
+        kelvin: f32,
+    }
+
+    #[test]
+    fn should_convert_correctly() {
+        let data_string = fs::read_to_string("data/conversions.json").unwrap();
+        let data = serde_json::from_str::<TestData>(data_string.as_str()).unwrap();
+
+        for entry in data.temperatureconversions {
+            assert!(Temp::F(entry.fahrenheit) == Temp::C(entry.celsius));
+            assert!(Temp::F(entry.fahrenheit) == Temp::K(entry.kelvin));
+
+            assert!(Temp::C(entry.celsius) == Temp::F(entry.fahrenheit));
+            assert!(Temp::C(entry.celsius) == Temp::K(entry.kelvin));
+
+            assert!(Temp::K(entry.kelvin) == Temp::F(entry.fahrenheit));
+            assert!(Temp::K(entry.kelvin) == Temp::C(entry.celsius));
+        }
     }
 }
