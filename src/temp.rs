@@ -77,23 +77,39 @@ pub fn round(val: f32) -> f32 {
 
 #[cfg(test)]
 mod tests {
+    use std::fs;
+
     use super::*;
 
-    #[test]
-    fn should_convert_to_c() {
-        assert_eq!(Temp::F(86.).as_c(), Temp::C(30.));
-        assert_eq!(Temp::K(303.15).as_c(), Temp::C(30.));
+    #[derive(Debug, Serialize, Deserialize)]
+    struct TestData {
+        temperatureconversions: Vec<Conversion>,
+    }
+
+    #[derive(Debug, Serialize, Deserialize)]
+    struct Conversion {
+        celsius: f32,
+        fahrenheit: f32,
+        kelvin: f32,
     }
 
     #[test]
-    fn should_convert_to_f() {
-        assert_eq!(Temp::C(30.).as_f(), Temp::F(86.));
-        assert_eq!(Temp::K(303.15).as_f(), Temp::F(86.));
-    }
+    fn should_convert_correctly() {
+        let data_string = fs::read_to_string("data/conversions.json").unwrap();
+        let data = serde_json::from_str::<TestData>(data_string.as_str()).unwrap();
 
-    #[test]
-    fn should_convert_to_k() {
-        assert_eq!(Temp::C(30.).as_k(), Temp::K(303.15));
-        assert_eq!(Temp::F(86.).as_k(), Temp::K(303.15));
+        for entry in data.temperatureconversions {
+            // convert to celcius
+            assert_eq!(Temp::F(entry.fahrenheit).as_c(), Temp::C(entry.celsius));
+            assert_eq!(Temp::K(entry.kelvin).as_c(), Temp::C(entry.celsius));
+
+            // convert to farenheit
+            assert_eq!(Temp::C(entry.celsius).as_f(), Temp::F(entry.fahrenheit));
+            assert_eq!(Temp::K(entry.kelvin).as_f(), Temp::F(entry.fahrenheit));
+
+            // convert to kelvin
+            assert_eq!(Temp::C(entry.celsius).as_k(), Temp::K(entry.kelvin));
+            assert_eq!(Temp::F(entry.fahrenheit).as_k(), Temp::K(entry.kelvin));
+        }
     }
 }
