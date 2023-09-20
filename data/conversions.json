@@ -6,11 +6,6 @@
       "kelvin": 173.15
     },
     {
-      "celsius": -50.0,
-      "fahrenheit": -58.0,
-      "kelvin": 223.15
-    },
-    {
       "celsius": 0.0,
       "fahrenheit": 32.0,
       "kelvin": 273.15
@@ -189,11 +184,6 @@
       "celsius": -110.0,
       "fahrenheit": -166.0,
       "kelvin": 163.15
-    },
-    {
-      "celsius": -100.0,
-      "fahrenheit": -148.0,
-      "kelvin": 173.15
     },
     {
       "celsius": -90.0,
