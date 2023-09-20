@@ -82,9 +82,7 @@ mod tests {
     use super::*;
 
     #[derive(Debug, Serialize, Deserialize)]
-    struct TestData {
-        temperatureconversions: Vec<Conversion>,
-    }
+    struct TestData(Vec<Conversion>);
 
     #[derive(Debug, Serialize, Deserialize)]
     struct Conversion {
@@ -98,7 +96,7 @@ mod tests {
         let data_string = fs::read_to_string("data/conversions.json").unwrap();
         let data = serde_json::from_str::<TestData>(data_string.as_str()).unwrap();
 
-        for entry in data.temperatureconversions {
+        for entry in data.0 {
             // convert to celcius
             assert_eq!(Temp::F(entry.fahrenheit).as_c(), Temp::C(entry.celsius));
             assert_eq!(Temp::K(entry.kelvin).as_c(), Temp::C(entry.celsius));
