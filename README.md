@@ -26,5 +26,5 @@ Temps can be safely serialized and deserialized using serde when the `serde` fea
 
 ```toml
 [dependencies]
-degrees = { version = "0.3", features = ["serde"] }
+degrees = { version = "0.4", features = ["serde"] }
 ```
