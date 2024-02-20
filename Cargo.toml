@@ -9,12 +9,12 @@ homepage = "https://github.com/deebloo/degrees"
 documentation = "https://github.com/deebloo/degrees"
 
 [dependencies]
-serde = { version = "1.0.188", optional = true }
+serde = { version = "1.0.197", optional = true }
 
 [features]
 serde = ["dep:serde", "serde/derive"]
 
 [dev-dependencies]
-serde = { version = "1.0.188", features = ["derive"] }
+serde = { version = "1.0.197", features = ["derive"] }
 serde_json = { version = "1.0.107" }
 degrees = { path = ".", features = ["serde"] }
